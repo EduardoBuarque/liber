@@ -1,0 +1,70 @@
+<?php
+/**
+ * Este é um arquivo de configuração do core.
+ *
+ * Use-o para configurar o comportamento do núcleo do Cake.
+ *
+ * PHP 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       app.Config
+ * @since         CakePHP(tm) v 0.2.9
+ * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
+/**
+ * Neste arquivo você configura suas informações de conexão ao banco de dados.
+ *
+ * @package       cake.config
+ */
+/**
+ * Classe de configuração do banco de dados.
+ * Você pode especificar múltiplas configurações para produção, desenvolvimento e teste.
+ *
+ * datasource => O nome de um datasource suportado; opções válidas são:
+ *		Database/Mysql 		- MySQL 4 & 5,
+ *		Database/Sqlite		- SQLite (PHP5 only),
+ *		Database/Postgres	- PostgreSQL 7 and higher,
+ *		Database/Sqlserver	- Microsoft SQL Server 2005 and higher
+ *
+ *
+ * persistent => true / false
+ * Determina se o banco de dados deve usar uma conexão persistente. 
+ *
+ * host =>
+ * O host no qual conecta-se ao banco de dados. Para adicionar o número de socket ou porta, use 'port' => numero
+ *
+ * prefix =>
+ * Usa o prefixo fornecido para todas as tabelas neste banco de dados. Esta configuração pode
+ * ser substituída em uma tabela como a propriedade Model::$tablePrefix.
+ *
+ * schema =>
+ * Para Postgres especifica em qual esquema você gostaria de usar as tabelas. Padrão para o Postgres é 'public'
+ *
+ * encoding =>
+ * Para o MySQL e Postgres especifica a codificação de caracteres para usar na conexão
+ * com o banco de dados.
+ *
+ * unix_socket =>
+ * Para o MySQL conectar via socket defina este parâmetro ao invés de 'host' e 'port'
+ */
+class DATABASE_CONFIG {
+
+	public $default = array(
+		'datasource' => 'Database/Mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'usuario',
+		'password' => 'senha',
+		'database' => 'nome_do_banco',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+	
+}

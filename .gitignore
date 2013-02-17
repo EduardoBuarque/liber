@@ -1,0 +1,16 @@
+.project
+.settings
+nbproject/private/
+Vendor/simpletest
+Config/database.php
+Console/Config/database.php
+outros/diagrama_banco.mwb.bak
+tmp/cache/*
+tmp/cache/models/*
+tmp/cache/persistent/*
+tmp/cache/views/*
+tmp/logs/*
+tmp/sessions/*
+tmp/tests/*
+outros/anotacoes.txt
+outros/ico

@@ -1,0 +1,12 @@
+[submodule "Plugin/DebugKit"]
+	path = Plugin/DebugKit
+	url = git://github.com/cakephp/debug_kit.git
+[submodule "Plugin/TwitterBootstrap"]
+	path = Plugin/TwitterBootstrap
+	url = git://github.com/radig/TwitterBootstrap.git
+[submodule "Plugin/Localized"]
+	path = Plugin/Localized
+	url = git://github.com/cakephp/localized.git
+[submodule "Plugin/CakePtbr"]
+	path = Plugin/CakePtbr
+	url = git://github.com/jrbasso/cake_ptbr.git
