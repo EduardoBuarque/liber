@@ -3,7 +3,6 @@
 class PagamentoTiposController extends AppController {
 	var $name = 'PagamentoTipos';
 	var $components = array('RequestHandler');
-	var $helpers = array('Javascript');
 	var $paginate = array (
 		'limit' => 10,
 		'order' => array (
@@ -47,7 +46,7 @@ class PagamentoTiposController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$dados = $this->paginate('PagamentoTipo');
@@ -55,7 +54,7 @@ class PagamentoTiposController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		
@@ -75,7 +74,7 @@ class PagamentoTiposController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -114,7 +113,7 @@ class PagamentoTiposController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		#FIXME nao estah deletando

@@ -3,7 +3,7 @@
 class ContaPagarController extends AppController {
 	var $name = 'ContaPagar';
 	var $components = array('Geral');
-	var $helpers = array('CakePtbr.Formatacao','Javascript','Jqplot');
+	var $helpers = array('CakePtbr.Formatacao','Jqplot');
 	
 	/**
 	 * Obtem dados necessarios ao decorrer deste controller.
@@ -53,7 +53,7 @@ class ContaPagarController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->paginate = array (
@@ -69,7 +69,7 @@ class ContaPagarController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -110,7 +110,7 @@ class ContaPagarController extends AppController {
 	}
 	
 	function editar($id=null) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -163,7 +163,7 @@ class ContaPagarController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
@@ -177,7 +177,7 @@ class ContaPagarController extends AppController {
 	}
 
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -242,7 +242,8 @@ class ContaPagarController extends AppController {
 	}
 
 	function resumo() {
-		if ( $this->RequestHandler->isAjax() ) {
+		#TODO utilizar o cake para gerar as querys
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		//grafico de percentual do uso dos itens do plano de contas

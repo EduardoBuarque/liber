@@ -7,7 +7,7 @@
  */
 class JqplotHelper extends AppHelper {
 	
-	var $helpers = array('Html','Javascript');
+	var $helpers = array('Html');
 	
 	function showHeaders () {
 		$retorno = null;

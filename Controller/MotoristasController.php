@@ -25,7 +25,7 @@ class MotoristasController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$dados = $this->paginate('Motorista');
@@ -33,7 +33,7 @@ class MotoristasController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -52,7 +52,7 @@ class MotoristasController extends AppController {
 			}
 			if ($this->Motorista->save($this->request->data)) {
 				$this->Session->setFlash('Motorista cadastrado com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect($this->referer(array('action' => 'index')));
 				}
 			}
@@ -63,7 +63,7 @@ class MotoristasController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -96,7 +96,7 @@ class MotoristasController extends AppController {
 			}
 			if ($this->Motorista->save($this->request->data)) {
 				$this->Session->setFlash('Motorista atualizado com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect(array('action'=>'index'));
 				}
 			}
@@ -107,13 +107,13 @@ class MotoristasController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
 			if ($this->Motorista->delete($id)) $this->Session->setFlash("Motorista $id excluído com sucesso.",'flash_sucesso');
 			else $this->Session->setFlash("Motorista $id não pode ser excluído.",'flash_erro');
-			if ( ! $this->RequestHandler->isAjax() ) {
+			if ( ! $this->request->isAjax() ) {
 				$this->redirect(array('action'=>'index'));
 			}
 		}

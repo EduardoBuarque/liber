@@ -16,7 +16,7 @@ class GruposController extends AppController {
 		}
 		
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$dados = $this->paginate('Grupo');
@@ -24,14 +24,14 @@ class GruposController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($this->request->data)) {
 			
 			if ($this->Grupo->save($this->request->data)) {
 				$this->Session->setFlash('Grupo cadastrado com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect($this->referer(array('action' => 'index')));
 				}
 			}
@@ -43,7 +43,7 @@ class GruposController extends AppController {
 	
 	function editar($id=NULL) {
 		$this->Grupo->id = $id;
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (empty ($this->request->data)) {
@@ -51,7 +51,7 @@ class GruposController extends AppController {
 			$this->request->data = $this->Grupo->read();
 			if ( ! $this->request->data) {
 				$this->Session->setFlash('Grupo não encontrado.','flash_erro');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect(array('action'=>'index'));
 				}
 			}
@@ -68,13 +68,13 @@ class GruposController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
 			if ($this->Grupo->delete($id)) $this->Session->setFlash("Grupo $id excluído com sucesso.",'flash_sucesso');
 			else $this->Session->setFlash("Grupo $id não pode ser excluído.",'flash_erro');
-			if ( ! $this->RequestHandler->isAjax() ) {
+			if ( ! $this->request->isAjax() ) {
 					$this->redirect(array('action'=>'index'));
 				}
 		}

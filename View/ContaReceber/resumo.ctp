@@ -1,7 +1,7 @@
 <?php
 print $this->Html->script('jqplot/jquery.jqplot');
-print $this->Html->script('jqplot/plugins/jqplot.donutRenderer');
-print $this->Html->script('jqplot/plugins/jqplot.pieRenderer');
+print $this->Html->script('jqplot/plugins/jqplot.donutRenderer.min');
+print $this->Html->script('jqplot/plugins/jqplot.pieRenderer.min');
 
 print $this->Html->css('jquery.jqplot.css');
 ?>

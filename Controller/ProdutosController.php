@@ -3,7 +3,6 @@
 class ProdutosController extends AppController {
 	var $name = 'Produtos';
 	var $components = array('RequestHandler');
-	var $helpers = array('Ajax', 'Javascript');
 
 	/**
 	 * Obtem dados necessarios ao decorrer deste controller.
@@ -26,7 +25,7 @@ class ProdutosController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->paginate = array (
@@ -41,7 +40,7 @@ class ProdutosController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -58,7 +57,7 @@ class ProdutosController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -85,7 +84,7 @@ class ProdutosController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
@@ -99,7 +98,7 @@ class ProdutosController extends AppController {
 	}
 
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -165,7 +164,7 @@ class ProdutosController extends AppController {
 		else if (strtoupper($campo_a_pesquisar) == "CODIGO") $campo = 'id';
 		else return null;
 		if (! isset($termo)) $termo = $this->request['url']['term'];
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$i=0;
 			$resultados=array();
 			$retorno=array();

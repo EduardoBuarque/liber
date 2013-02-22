@@ -11,7 +11,7 @@ class DocumentoTiposController extends AppController {
 	);
 
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$dados = $this->paginate('DocumentoTipo');
@@ -19,7 +19,7 @@ class DocumentoTiposController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($this->request->data)) {
@@ -35,7 +35,7 @@ class DocumentoTiposController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (empty ($this->request->data)) {
@@ -61,7 +61,7 @@ class DocumentoTiposController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {

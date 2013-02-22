@@ -3,7 +3,7 @@
 class CompraPedidosController extends AppController {
 	var $name = 'CompraPedidos';
 	var $components = array('Geral');
-	var $helpers = array('CakePtbr.Estados', 'Javascript','CakePtbr.Formatacao','Geral');
+	var $helpers = array('CakePtbr.Estados','CakePtbr.Formatacao','Geral');
 	var $paginate = array (
 		'limit' => 10,
 		'order' => array (
@@ -90,7 +90,7 @@ class CompraPedidosController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) $this->layout = 'ajax';
+		if ( $this->request->isAjax() ) $this->layout = 'ajax';
 		$this->_obter_opcoes();
 		$dados = $this->paginate = array(
 		    'contain' => array('Fornecedor.nome','PagamentoTipo.nome'),
@@ -101,7 +101,7 @@ class CompraPedidosController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) $this->layout = 'ajax';
+		if ( $this->request->isAjax() ) $this->layout = 'ajax';
 		$this->set("title_for_layout","Pedido de compra"); 
 		$this->_obter_opcoes();
 		if (! empty($this->request->data)) {
@@ -130,7 +130,7 @@ class CompraPedidosController extends AppController {
 			if ($this->CompraPedido->saveAll($this->request->data,array('validate'=>'first'))) {
 				$this->CompraPedido->commit();
 				$this->Session->setFlash("Pedido de compra número {$this->CompraPedido->id} cadastrado com sucesso.",'flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) $this->redirect($this->referer(array('action' => 'index')));
+				if ( ! $this->request->isAjax() ) $this->redirect($this->referer(array('action' => 'index')));
 			}
 			else {
 				$this->Session->setFlash('Erro ao cadastrar o pedido de compra.','flash_erro');
@@ -140,7 +140,7 @@ class CompraPedidosController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) $this->layout = 'ajax';
+		if ( $this->request->isAjax() ) $this->layout = 'ajax';
 		$this->set("title_for_layout","Pedido de compra"); 
 		$this->CompraPedido->id = $id;
 		$this->_obter_opcoes();
@@ -205,7 +205,7 @@ class CompraPedidosController extends AppController {
 			if ($this->CompraPedido->saveAll($this->request->data,array('validate'=>'first'))) {
 				$this->CompraPedido->commit();
 				$this->Session->setFlash("Pedido de compra alterado com sucesso.",'flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) $this->redirect(array('action'=>'index'));
+				if ( ! $this->request->isAjax() ) $this->redirect(array('action'=>'index'));
 			}
 			else {
 				$this->Session->setFlash('Erro ao editar o pedido de compra.','flash_erro');
@@ -215,23 +215,23 @@ class CompraPedidosController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) $this->layout = 'ajax';
+		if ( $this->request->isAjax() ) $this->layout = 'ajax';
 		if (empty($id)) {
 			$this->Session->setFlash('Pedido de compra não informado.','flash_erro');
-			if ( ! $this->RequestHandler->isAjax() ) $this->redirect(array('action'=>'index'));
+			if ( ! $this->request->isAjax() ) $this->redirect(array('action'=>'index'));
 		}
 		$this->CompraPedido->id = $id;
 		$situacao = $this->CompraPedido->field('situacao');
 		if (empty ($situacao)) {
 			$this->Session->setFlash('Pedido de compra não encontrado','flash_erro');
-			if ( ! $this->RequestHandler->isAjax() ) $this->redirect(array('action'=>'index'));
+			if ( ! $this->request->isAjax() ) $this->redirect(array('action'=>'index'));
 			return false;
 		}
 		// #TODO Um pedido de compra apenas pode ser deletado se o estoque nao ficar negativo
 		$situacao = strtoupper($situacao);
 		if ( ($situacao != 'A') ) {
 			$this->Session->setFlash("A situação do pedido de compra ${id} impede a sua exclusão. Talvez você deva apenas cancelá-lo",'flash_erro');
-			if ( ! $this->RequestHandler->isAjax() ) $this->redirect(array('action'=>'index'));
+			if ( ! $this->request->isAjax() ) $this->redirect(array('action'=>'index'));
 			return false;
 		}
 		$this->CompraPedido->begin();
@@ -239,7 +239,7 @@ class CompraPedidosController extends AppController {
 			if ($this->CompraPedido->delete($id)) {
 				$this->Session->setFlash("Pedido de compra número $id foi excluído com sucesso.",'flash_sucesso');
 				$this->CompraPedido->commit();
-				if ( ! $this->RequestHandler->isAjax() ) $this->redirect(array('action'=>'index'));
+				if ( ! $this->request->isAjax() ) $this->redirect(array('action'=>'index'));
 			}
 			else {
 				$this->Session->setFlash("Pedido de compra $id não pode ser excluído",'flassh_erro');
@@ -254,7 +254,7 @@ class CompraPedidosController extends AppController {
 	
 	function detalhar($id = null) {
 		$this->_obter_opcoes();
-		if ( $this->RequestHandler->isAjax() ) $this->layout = 'ajax';
+		if ( $this->request->isAjax() ) $this->layout = 'ajax';
 		$this->set("title_for_layout","Pedido de compra");
 		$this->CompraPedido->contain('CompraPedidoItem','Fornecedor.nome','PagamentoTipo.nome');
 		$this->CompraPedido->id = $id;
@@ -267,7 +267,7 @@ class CompraPedidosController extends AppController {
 	}
 	
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) $this->layout = 'ajax';
+		if ( $this->request->isAjax() ) $this->layout = 'ajax';
 		$this->set("title_for_layout","Pedido de compra");
 		$this->_obter_opcoes();
 		if (! empty($this->request->data)) {

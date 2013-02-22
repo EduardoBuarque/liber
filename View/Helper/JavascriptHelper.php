@@ -549,136 +549,13 @@ class JavascriptHelper extends AppHelper {
 		}
 		return $this->codeBlock("\n\n" . $javascript, $options);
 	}
-/**
- * Generates a JavaScript object in JavaScript Object Notation (JSON)
- * from an array
- *
- * ### Options
- *
- * - block - Wraps the return value in a script tag if true. Default is false
- * - prefix - Prepends the string to the returned data. Default is ''
- * - postfix - Appends the string to the returned data. Default is ''
- * - stringKeys - A list of array keys to be treated as a string.
- * - quoteKeys - If false treats $stringKeys as a list of keys **not** to be quoted. Default is true.
- * - q - The type of quote to use. Default is "'"
- *
- * @param array $data Data to be converted
- * @param array $options Set of options: block, prefix, postfix, stringKeys, quoteKeys, q
- * @param string $prefix DEPRECATED, use $options['prefix'] instead. Prepends the string to the returned data
- * @param string $postfix DEPRECATED, use $options['postfix'] instead. Appends the string to the returned data
- * @param array $stringKeys DEPRECATED, use $options['stringKeys'] instead. A list of array keys to be treated as a string
- * @param boolean $quoteKeys DEPRECATED, use $options['quoteKeys'] instead. If false, treats $stringKey as a list of keys *not* to be quoted
- * @param string $q DEPRECATED, use $options['q'] instead. The type of quote to use
- * @return string A JSON code block
- */
-	function object($data = array(), $options = array(), $prefix = null, $postfix = null, $stringKeys = null, $quoteKeys = null, $q = null) {
-		if (!empty($options) && !is_array($options)) {
-			$options = array('block' => $options);
-		} else if (empty($options)) {
-			$options = array();
-		}
 
-		$defaultOptions = array(
-			'block' => false, 'prefix' => '', 'postfix' => '',
-			'stringKeys' => array(), 'quoteKeys' => true, 'q' => '"'
-		);
-		$options = array_merge($defaultOptions, $options, array_filter(compact(array_keys($defaultOptions))));
-
-		if (is_object($data)) {
-			$data = get_object_vars($data);
-		}
-
-		$out = $keys = array();
-		$numeric = true;
-
-		if ($this->useNative) {
-			$rt = json_encode($data);
-		} else {
-			if (is_null($data)) {
-				return 'null';
-			}
-			if (is_bool($data)) {
-				return $data ? 'true' : 'false';
-			}
-
-			if (is_array($data)) {
-				$keys = array_keys($data);
-			}
-
-			if (!empty($keys)) {
-				$numeric = (array_values($keys) === array_keys(array_values($keys)));
-			}
-
-			foreach ($data as $key => $val) {
-				if (is_array($val) || is_object($val)) {
-					$val = $this->object($val, array_merge($options, array('block' => false)));
-				} else {
-					$quoteStrings = (
-						!count($options['stringKeys']) ||
-						($options['quoteKeys'] && in_array($key, $options['stringKeys'], true)) ||
-						(!$options['quoteKeys'] && !in_array($key, $options['stringKeys'], true))
-					);
-					$val = $this->value($val, $quoteStrings);
-				}
-				if (!$numeric) {
-					$val = $options['q'] . $this->value($key, false) . $options['q'] . ':' . $val;
-				}
-				$out[] = $val;
-			}
-
-			if (!$numeric) {
-				$rt = '{' . join(',', $out) . '}';
-			} else {
-				$rt = '[' . join(',', $out) . ']';
-			}
-		}
-		$rt = $options['prefix'] . $rt . $options['postfix'];
-
-		if ($options['block']) {
-			$rt = $this->codeBlock($rt, array_diff_key($options, $defaultOptions));
-		}
-
-		return $rt;
-	}
-/**
- * Converts a PHP-native variable of any type to a JSON-equivalent representation
- *
- * @param mixed $val A PHP variable to be converted to JSON
- * @param boolean $quoteStrings If false, leaves string values unquoted
- * @return string a JavaScript-safe/JSON representation of $val
- */
-	function value($val, $quoteStrings = true) {
-		switch (true) {
-			case (is_array($val) || is_object($val)):
-				$val = $this->object($val);
-			break;
-			case ($val === null):
-				$val = 'null';
-			break;
-			case (is_bool($val)):
-				$val = ife($val, 'true', 'false');
-			break;
-			case (is_int($val)):
-				$val = $val;
-			break;
-			case (is_float($val)):
-				$val = sprintf("%.11f", $val);
-			break;
-			default:
-				$val = $this->escapeString($val);
-				if ($quoteStrings) {
-					$val = '"' . $val . '"';
-				}
-			break;
-		}
-		return $val;
-	}
 /**
  * AfterRender callback.  Writes any cached events to the view, or to a temp file.
  *
  * @return null
  */
-	function afterRender() {
+	function afterRender($viewFile) {
 		if (!$this->enabled) {
 			return;
 		}

@@ -3,7 +3,6 @@
 class ServicosController extends AppController {
 	var $name = 'Servicos';
 	var $components = array('RequestHandler');
-	var $helpers = array('Ajax', 'Javascript');
 
 	/**
 	 * Obtem dados necessarios ao decorrer deste controller.
@@ -19,7 +18,7 @@ class ServicosController extends AppController {
 	
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->paginate = array (
@@ -34,7 +33,7 @@ class ServicosController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -42,7 +41,7 @@ class ServicosController extends AppController {
 			
 			if ($this->Servico->save($this->request->data)) {
 				$this->Session->setFlash('Serviço cadastrado com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect($this->referer(array('action' => 'index')));
 				}
 			}
@@ -53,7 +52,7 @@ class ServicosController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -71,7 +70,7 @@ class ServicosController extends AppController {
 			
 			if ($this->Servico->save($this->request->data)) {
 				$this->Session->setFlash('Serviço atualizado com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect($this->referer(array('action' => 'index')));
 				}
 			}
@@ -82,7 +81,7 @@ class ServicosController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
@@ -100,7 +99,7 @@ class ServicosController extends AppController {
 		else if (strtoupper($campo_a_pesquisar) == "CODIGO") $campo = 'id';
 		else return null;
 		if (! isset($termo)) $termo = $this->request['url']['term'];
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$i=0;
 			$resultados=array();
 			$retorno=array();

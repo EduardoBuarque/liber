@@ -3,7 +3,7 @@
 class ServicoOrdensController extends AppController {
 	var $name = 'ServicoOrdens';
 	var $components = array('RequestHandler','Geral','ContasReceber');
-	var $helpers = array('CakePtbr.Estados','Ajax', 'Javascript','CakePtbr.Formatacao', 'Geral');
+	var $helpers = array('CakePtbr.Estados','CakePtbr.Formatacao', 'Geral');
 	
 	/**
 	 * Obtem dados necessarios ao decorrer deste controller.
@@ -129,7 +129,7 @@ class ServicoOrdensController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -145,7 +145,7 @@ class ServicoOrdensController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set("title_for_layout","Ordem de serviço"); 
@@ -196,7 +196,7 @@ class ServicoOrdensController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set("title_for_layout","Ordem de serviço"); 
@@ -280,7 +280,7 @@ class ServicoOrdensController extends AppController {
 	}
 	
 	function detalhar($id = null) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -305,7 +305,7 @@ class ServicoOrdensController extends AppController {
 	}
 
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
@@ -340,7 +340,7 @@ class ServicoOrdensController extends AppController {
 	}
 	
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set("title_for_layout","Ordem de serviço");

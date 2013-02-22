@@ -5,7 +5,7 @@
 class VendaPedidosController extends AppController {
 	var $name = 'VendaPedidos';
 	var $components = array ('Geral','ContasReceber');
-	var $helpers = array('CakePtbr.Estados', 'Javascript','CakePtbr.Formatacao','Geral');
+	var $helpers = array('CakePtbr.Estados','CakePtbr.Formatacao','Geral');
 	var $paginate = array (
 		'limit' => 10,
 		'order' => array (
@@ -193,7 +193,7 @@ class VendaPedidosController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		// Filtrando os dados solicitados na query
@@ -208,7 +208,7 @@ class VendaPedidosController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set("title_for_layout","Pedido de venda"); 
@@ -267,7 +267,7 @@ class VendaPedidosController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set("title_for_layout","Pedido de venda"); 
@@ -366,7 +366,7 @@ class VendaPedidosController extends AppController {
 	}
 	
 	function detalhar($id = null) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set("title_for_layout","Pedido de venda");
@@ -391,7 +391,7 @@ class VendaPedidosController extends AppController {
 	}
 
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
@@ -427,7 +427,7 @@ class VendaPedidosController extends AppController {
 	}
 	
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set("title_for_layout","Pedido de venda");

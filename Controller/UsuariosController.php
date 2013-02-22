@@ -6,7 +6,6 @@
 class UsuariosController extends AppController {
 	var $name = 'Usuarios';
 	var $components = array('Auth','RequestHandler');
-	var $helpers = array('Javascript','Ajax');
 	var $paginate = array (
 		'limit' => 10,
 		'contain' => array(),
@@ -165,7 +164,7 @@ class UsuariosController extends AppController {
 	
 	function index() {
 		$this->_obter_opcoes();
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->set('consulta_usuario',$this->paginate('Usuario'));
@@ -173,7 +172,7 @@ class UsuariosController extends AppController {
 	
 	function cadastrar() {
 		$this->_obter_opcoes();
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($this->request->data)) {
@@ -202,7 +201,7 @@ class UsuariosController extends AppController {
 	function editar ($id = NULL) {
 		$this->_obter_opcoes();
 		$this->Usuario->id = $id;
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		//popular o formulario, na primeira carga
@@ -248,7 +247,7 @@ class UsuariosController extends AppController {
 	}
 	
 	function inativar ($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->Usuario->id = $id;	

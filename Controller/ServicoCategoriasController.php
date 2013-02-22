@@ -11,7 +11,7 @@ class ServicoCategoriasController extends AppController {
 	);
 
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$dados = $this->paginate('ServicoCategoria');
@@ -19,7 +19,7 @@ class ServicoCategoriasController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($this->request->data)) {
@@ -27,7 +27,7 @@ class ServicoCategoriasController extends AppController {
 			if ($this->ServicoCategoria->save($this->request->data)) {
 				unset($this->request->data);
 				$this->Session->setFlash('Categoria de serviço cadastrada com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect($this->referer(array('action' => 'index')));
 				}
 			}
@@ -38,7 +38,7 @@ class ServicoCategoriasController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (empty ($this->request->data)) {
@@ -47,7 +47,7 @@ class ServicoCategoriasController extends AppController {
 			$this->request->data = $this->ServicoCategoria->read();
 			if ( ! $this->request->data) {
 				$this->Session->setFlash('Categoria de serviço não encontrada.','flash_erro');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect(array('action'=>'index'));
 				}
 			}
@@ -58,7 +58,7 @@ class ServicoCategoriasController extends AppController {
 			if ($this->ServicoCategoria->save($this->request->data)) {
 				unset($this->request->data);
 				$this->Session->setFlash('Categoria de serviço atualizada com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect(array('action'=>'index'));
 				}
 			}
@@ -69,7 +69,7 @@ class ServicoCategoriasController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {

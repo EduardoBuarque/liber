@@ -2,7 +2,6 @@
 
 class ContaPlanosController extends AppController {
 	var $name = 'ContaPlanos';
-	var $helpers = array('Ajax');
 
 	function _obter_opcoes() {
 		$opcoes = array(
@@ -15,7 +14,7 @@ class ContaPlanosController extends AppController {
 	
 	function index() {
 		$this->_obter_opcoes();
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->paginate = array (
@@ -32,7 +31,7 @@ class ContaPlanosController extends AppController {
 	
 	function cadastrar() {
 		$this->_obter_opcoes();
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($this->request->data)) {
@@ -49,7 +48,7 @@ class ContaPlanosController extends AppController {
 	
 	function editar($id=NULL) {
 		$this->_obter_opcoes();
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (empty ($this->request->data)) {
@@ -75,7 +74,7 @@ class ContaPlanosController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {

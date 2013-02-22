@@ -3,7 +3,7 @@
 class ClientesController extends AppController {
 	var $name = 'Clientes';
 	var $components = array('RequestHandler');
-	var $helpers = array('CakePtbr.Estados','Ajax', 'Javascript');
+	var $helpers = array('CakePtbr.Estados');
            
 	/**
 	 * Obtem dados necessarios ao decorrer deste controller.
@@ -37,7 +37,7 @@ class ClientesController extends AppController {
 	 * Lista todos os Clientes
 	 */
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->paginate = array (
@@ -52,7 +52,7 @@ class ClientesController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -80,7 +80,7 @@ class ClientesController extends AppController {
 	
 	function editar($id=NULL) {
 		
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -109,7 +109,7 @@ class ClientesController extends AppController {
 	}
 	
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($this->request->data)) {
@@ -171,7 +171,7 @@ class ClientesController extends AppController {
 	}
 	
 	function detalhar($id = NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if ($id) {
@@ -195,7 +195,7 @@ class ClientesController extends AppController {
 		else if (strtoupper($campo_a_pesquisar) == "CODIGO") $campo = 'id';
 		else return null;
 		if (! isset($termo)) $termo = $this->request['url']['term'];
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$i=0;
 			$resultados=array();
 			$retorno=array();

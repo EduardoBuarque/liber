@@ -2,7 +2,7 @@
 
 class ContaReceberController extends AppController {
 	var $name = 'ContaReceber';
-	var $helpers = array('CakePtbr.Formatacao','Javascript','Jqplot');
+	var $helpers = array('CakePtbr.Formatacao','Jqplot');
 	
 	/**
 	 * Obtem dados necessarios ao decorrer deste controller.
@@ -51,7 +51,7 @@ class ContaReceberController extends AppController {
 	}
 	
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->paginate = array (
@@ -68,7 +68,7 @@ class ContaReceberController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -109,7 +109,7 @@ class ContaReceberController extends AppController {
 	}
 	
 	function editar($id=null) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -162,7 +162,7 @@ class ContaReceberController extends AppController {
 	}
 	
 	function excluir($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (! empty($id)) {
@@ -176,7 +176,7 @@ class ContaReceberController extends AppController {
 	}
 
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -241,9 +241,10 @@ class ContaReceberController extends AppController {
 	}
 
 	function resumo() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
+		#TODO utilizar o cake para gerar as querys
 		//grafico de percentual do uso dos itens do plano de contas
 		$consulta = $this->ContaReceber->query("SELECT conta_receber.conta_plano_id,COUNT(*) AS numero_ocorrencias, conta_plano.nome
 		FROM conta_receber AS conta_receber, conta_planos AS conta_plano

@@ -9,23 +9,22 @@
 class SistemaController extends AppController {
 	var $name = "Sistema";
 	var $components = array('RequestHandler');
-	var $helpers = array('Javascript','Ajax');
 	var $uses = array(); //nao ha model para este controller
 
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 	}
 	
 	function ajuda() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 	}
 	
 	function sobre() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 	}
@@ -45,7 +44,7 @@ class SistemaController extends AppController {
 	 * outra alternativa: http://www.phpfreaks.com/forums/index.php?topic=240370.0
 	 */
 	function inicio() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->loadModel('ContaPagar');

@@ -2,7 +2,7 @@
 
 class FornecedoresController extends AppController {
 	var $name = 'Fornecedores';
-	var $helpers = array('CakePtbr.Estados','Javascript','Ajax');
+	var $helpers = array('CakePtbr.Estados');
 	var $components = array('RequestHandler');
 
 	/**
@@ -27,7 +27,7 @@ class FornecedoresController extends AppController {
 	 * Lista todos os Fornecedores
 	 */
 	function index() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->paginate = array (
@@ -42,7 +42,7 @@ class FornecedoresController extends AppController {
 	}
 	
 	function cadastrar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -61,7 +61,7 @@ class FornecedoresController extends AppController {
 	}
 	
 	function editar($id=NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		$this->_obter_opcoes();
@@ -90,7 +90,7 @@ class FornecedoresController extends AppController {
 	}
 	
 	function pesquisar() {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		
@@ -152,7 +152,7 @@ class FornecedoresController extends AppController {
 	}
 	
 	function detalhar($id = NULL) {
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if ($id) {
@@ -176,7 +176,7 @@ class FornecedoresController extends AppController {
 		else if (strtoupper($campo_a_pesquisar) == "CODIGO") $campo = 'id';
 		else return null;
 		if (! isset($termo)) $termo = $this->request['url']['term'];
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$i=0;
 			$resultados=array();
 			$retorno=array();

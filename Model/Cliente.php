@@ -1,6 +1,6 @@
 <?php
 
-App::uses('BrValidation', 'Localized.Lib');
+App::uses('BrValidation', 'Localized.Validation');
 
 class Cliente extends AppModel {
 	var $name = 'Cliente';

@@ -16,7 +16,7 @@ class SistemaOpcoesController extends AppController {
 	function index() {
 		$this->SistemaOpcao->id = 1;
 		$this->_obter_opcoes();
-		if ( $this->RequestHandler->isAjax() ) {
+		if ( $this->request->isAjax() ) {
 			$this->layout = 'ajax';
 		}
 		if (empty ($this->request->data)) {
@@ -24,7 +24,7 @@ class SistemaOpcoesController extends AppController {
 			$this->request->data = $this->SistemaOpcao->read();
 			if ( ! $this->request->data) {
 				$this->Session->setFlash('Opções não encontradas.','flash_erro');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect(array('action'=>'index'));
 				}
 			}
@@ -32,7 +32,7 @@ class SistemaOpcoesController extends AppController {
 		else {		
 			if ($this->SistemaOpcao->save($this->request->data)) {
 				$this->Session->setFlash('Opções atualizadas com sucesso.','flash_sucesso');
-				if ( ! $this->RequestHandler->isAjax() ) {
+				if ( ! $this->request->isAjax() ) {
 					$this->redirect(array('action'=>'index'));
 				}
 			}
